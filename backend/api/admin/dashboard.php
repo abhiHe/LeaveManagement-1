@@ -41,6 +41,17 @@ $rejectedStmt = $db->prepare($rejectedQuery);
 $rejectedStmt->execute();
 $rejectedCount = $rejectedStmt->fetch(PDO::FETCH_ASSOC)['total'];
 
+$dashboardData = array(
+    "totalEmployees" => $empCount,
+    "totalDepartments" => $deptCount,
+    "totalLeaveTypes" => $leaveTypeCount,
+    "pendingLeaves" => $pendingCount,
+    "approvedLeaves" => $approvedCount,
+    "rejectedLeaves" => $rejectedCount
+);
+
+echo json_encode(array("success" => true, "data" => $dashboardData));
+
 echo json_encode(array(
     "success" => true,
     "data" => array(

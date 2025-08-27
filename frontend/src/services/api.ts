@@ -83,6 +83,27 @@ export const adminAPI = {
     return response.data;
   },
   
+  // Department APIs
+  getDepartments: async () => {
+    const response = await apiClient.get('/admin/departments.php');
+    return response.data;
+  },
+  
+  addDepartment: async (data: any) => {
+    const response = await apiClient.post('/admin/departments.php', data);
+    return response.data;
+  },
+  
+  updateDepartment: async (data: any) => {
+    const response = await apiClient.put('/admin/departments.php', data);
+    return response.data;
+  },
+  
+  deleteDepartment: async (id: number) => {
+    const response = await apiClient.delete('/admin/departments.php', { data: { id } });
+    return response.data;
+  },
+  
   getLeaves: async (status: string = 'all') => {
     const response = await apiClient.get(`/admin/leaves.php?status=${status}`);
     return response.data;
@@ -90,6 +111,34 @@ export const adminAPI = {
   
   updateLeaveStatus: async (data: { id: number; status: number; adminRemark: string }) => {
     const response = await apiClient.put('/admin/leaves.php', data);
+    return response.data;
+  },
+};
+
+// Employee APIs
+export const employeeAPI = {
+  getProfile: async (empId: number) => {
+    const response = await apiClient.get(`/employee/profile.php?empId=${empId}`);
+    return response.data;
+  },
+  
+  updateProfile: async (data: any) => {
+    const response = await apiClient.put('/employee/profile.php', data);
+    return response.data;
+  },
+  
+  getLeaves: async (empId: number) => {
+    const response = await apiClient.get(`/employee/leaves.php?empId=${empId}`);
+    return response.data;
+  },
+  
+  applyLeave: async (data: any) => {
+    const response = await apiClient.post('/employee/leaves.php', data);
+    return response.data;
+  },
+  
+  changePassword: async (data: { empId: number; currentPassword: string; newPassword: string }) => {
+    const response = await apiClient.post('/employee/change-password.php', data);
     return response.data;
   },
 };
