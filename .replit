@@ -2,3 +2,24 @@ modules = ["nodejs-20", "web", "php-8.2"]
 
 [nix]
 channel = "stable-25_05"
+
+[workflows]
+runButton = "Start Backend Server"
+
+[[workflows.workflow]]
+name = "Start Backend Server"
+author = 46950642
+mode = "sequential"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "cd backend && php -S 0.0.0.0:8000"
+
+[[workflows.workflow]]
+name = "Start Frontend"
+author = 46950642
+mode = "sequential"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "cd frontend && npm install && npm start"
